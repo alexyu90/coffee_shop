@@ -69,7 +69,7 @@ The `--reload` flag will detect file changes and restart the server automaticall
         - can `get:drinks-detail`
     - Manager
         - can perform all actions
-7. Test your endpoints with [Postman](https://getpostman.com). 
+7. Test your endpoints with [Postman](https://getpostman.com).
     - Register 2 users - assign the Barista role to one and Manager role to the other.
     - Sign into each account and make note of the JWT.
     - Import the postman collection `./starter_code/backend/udacity-fsnd-udaspicelatte.postman_collection.json`
@@ -83,3 +83,42 @@ There are `@TODO` comments throughout the `./backend/src`. We recommend tackling
 
 1. `./src/auth/auth.py`
 2. `./src/api.py`
+
+## API documentation
+### Endpoints
+```
+GET '/drinks'
+GET '/drinks-detail'
+POST 'drinks'
+PATCH 'drinks/<id>'
+DELETE 'drinks/<id>'
+```
+
+#### GET /drinks
+- Public endpoint
+- Contains only the drink.short() data representation
+- Returns: {"success": True, "drinks": drinks} where drinks is the list of drinks
+
+#### GET /drinks-detail
+- Requires the `'get:drinks-detail'` permission
+- Contains the drink.long() data representation
+- Returns: {"success": True, "drinks": drinks} where drinks is the list of drinks
+
+#### POST /drinks
+- Creates a new row in the drinks table
+- Requires the `'post:drinks'` permission
+- Contains the drink.long() data representation
+- Returns: {"success": True, "drinks": drink} where drink is an array containing only the newly created drink
+
+#### PATCH /drinks/<id>
+- Update the corresponding row for <id>
+- Request Arguments: <id> of the existing model
+- Require the `'patch:drinks'` permission
+- Contains the drink.long() data representation
+- Returns: {"success": True, "drinks": drink} where drink an array containing only the updated drink
+
+#### DELETE /drinks/<id>
+- Delete the corresponding row for <id>
+- Request Arguments: <id> of the existing model
+- Requires the `'delete:drinks'` permission
+- Returns: {"success": True, "delete": id} where id is the id of the deleted record
